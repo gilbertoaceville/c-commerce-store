@@ -14,9 +14,9 @@ module.exports = {
         secondary: "rgb(var(--color-secondary))",
         tertiary: "rgb(var(--color-tertiary))",
       },
-      backgroundColor: {
-        gradientPrimary: "var(--background-gradient)",
-      },
+      backgroundImage: {
+        "gradient-primary": "linear-gradient(to top, rgb(var(--color-gradient-primary)), rgb(var(--color-gradient-secondary)))"
+      }
     },
   },
   plugins: [],

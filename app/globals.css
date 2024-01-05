@@ -7,7 +7,8 @@
   --color-secondary: 214, 219, 220;
   --color-accent: 255, 255, 255;
   --color-tertiary: 241 245 249;
-  --background-gradient: linear-gradient(to top, #1A1A1A, #3A3B3C);
+  --color-gradient-primary: 26, 26, 26;
+  --color-gradient-secondary: 58, 59, 60;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,7 +17,9 @@
     --color-secondary: 0, 0, 0;
     --color-accent: 0, 0, 0;
     --color-tertiary: 37, 37, 37;
-    --background-gradient: linear-gradient(to top, #182237, #253352);
+    --color-gradient-primary: 24, 34, 55;
+    --color-gradient-secondary: 37, 51, 82;
+    --background-gradient: linear-gradient(to top, rgb(24, 34, 55), rgb(37, 51, 82));
   }
 }
 
