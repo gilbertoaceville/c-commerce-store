@@ -13,10 +13,14 @@ module.exports = {
         primary: "rgb(var(--color-primary))",
         secondary: "rgb(var(--color-secondary))",
         tertiary: "rgb(var(--color-tertiary))",
+        foreground: "rgb(var(--color-foreground))",
       },
       backgroundImage: {
-        "gradient-primary": "linear-gradient(to top, rgb(var(--color-gradient-primary)), rgb(var(--color-gradient-secondary)))"
-      }
+        "gradient-primary":
+          "linear-gradient(to top, rgb(var(--color-gradient-primary)), rgb(var(--color-gradient-secondary)))",
+        "gradient-secondary":
+          "linear-gradient(to bottom, rgb(var(--color-tertiary)), rgb(var(--color-accent)))",
+      },
     },
   },
   plugins: [],

@@ -9,10 +9,8 @@ import { ProductCardProps } from "./types";
 
 export default function ProductCard({ data }: ProductCardProps) {
   const productName = getTruncatedString(data.name);
-  const productRating = getProductRating(data?.reviews || []);
-  const reviewLength = data?.reviews?.length;
+  const { productRating, reviewLength, reviewTextEnd } = getProductRating(data?.reviews || []);
 
-  const reviewTextEnd = reviewLength === 1 ? "" : "s";
   return (
     <Link
       href={`/product/${data.id}`}

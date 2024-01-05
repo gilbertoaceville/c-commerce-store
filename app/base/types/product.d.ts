@@ -11,6 +11,7 @@ export interface ProductsEntity {
   inStock: boolean;
   images?: ImagesEntity[];
   reviews?: ReviewsEntity[];
+  quantity?: number;
 }
 export interface ImagesEntity {
   color: string;

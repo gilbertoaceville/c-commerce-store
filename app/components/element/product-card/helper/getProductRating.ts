@@ -5,7 +5,12 @@ export function getProductRating(reviews: ReviewsEntity[]) {
     return curr?.rating + acc;
   }, 0);
 
-  console.log(reviewsRating);
+  const reviewLength = reviews?.length;
+  const reviewTextEnd = reviewLength === 1 ? "" : "s";
 
-  return reviewsRating / reviews?.length;
+  return {
+    productRating: reviewsRating / reviews?.length,
+    reviewLength,
+    reviewTextEnd,
+  };
 }
