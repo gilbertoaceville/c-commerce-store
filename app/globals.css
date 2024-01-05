@@ -43,6 +43,14 @@
   .stock[data-in-stock="true"] {
     @apply text-green-500;
   }
+
+  .cta[data-small="true"] {
+    @apply text-sm font-light py-1 px-2 border-[1px];
+  }
+
+  .cta[data-with-outline="true"] {
+    @apply bg-transparent text-primary border-primary;
+  }
 }
 
 @layer utilities {
@@ -51,4 +59,3 @@
     @apply w-[30%] my-2 border-foreground border-[1.5px];
   }
 }
-

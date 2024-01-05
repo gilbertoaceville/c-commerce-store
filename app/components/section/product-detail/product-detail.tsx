@@ -11,6 +11,8 @@ import ProductQty from "@/components/element/product/quantity/quantity";
 
 import { ProductDetailProps } from "./types";
 import locale from "./locale/en.json";
+import Button from "@/components/element/button/button";
+import ProductImages from "@/components/element/product/images/images";
 
 export const defaultCart: CartEntity = {
   id: "",
@@ -42,7 +44,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
   const productStock = product.inStock ? "In stock" : "Out of stock";
 
-  const handleSelectColor = useCallback((attribute: AttributesEntity) => {
+  const handleSelectAttribute = useCallback((attribute: AttributesEntity) => {
     setCartItem((prevState) => ({
       ...prevState,
       selectedAttributes: attribute,
@@ -69,7 +71,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-      <div>images</div>
+      <ProductImages
+        cartItem={cartItem}
+        product={product}
+        attrSelectHandler={handleSelectAttribute}
+      />
       <div className="flex flex-col gap-1 text-sm text-foreground">
         <h2 className="text-3xl font-medium text-primary">{product.name}</h2>
         <div className="flex items-center gap-2 my-4 separator">
@@ -98,7 +104,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         <ProductColor
           cartItem={cartItem}
           attributes={product.attributes as AttributesEntity[]}
-          colorSelectHandler={handleSelectColor}
+          colorSelectHandler={handleSelectAttribute}
         />
         <ProductQty
           cartItem={cartItem}
@@ -106,7 +112,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           handleQtyIncrease={handleQtyIncrease}
           handleQtyDecrease={handleQtyDecrease}
         />
-        <div>Add to cart</div>
+        <div className="max-w-[300px] mt-4">
+          <Button label={locale.button} outline />
+        </div>
       </div>
     </div>
   );

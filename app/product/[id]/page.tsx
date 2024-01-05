@@ -6,7 +6,11 @@ import data from "@/base/lib/products.json";
 export default function Product({ params }: IParams) {
   return (
     <Container className="p-8">
-      <ProductDetail product={data.products[1]} />
+      <ProductDetail product={data.products[2]} />
+      <div className="flex flex-col mt-20 gap-4">
+        <div>Add Rating</div>
+        <div>List Rating</div>
+      </div>
     </Container>
   );
 }
