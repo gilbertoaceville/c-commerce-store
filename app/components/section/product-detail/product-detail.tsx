@@ -1,13 +1,18 @@
 "use client";
 
-import { getProductRating } from "@/components/element/product-card/helper/getProductRating";
-import { ProductDetailProps } from "./types";
+import { useCallback, useState } from "react";
 
 import { Rating } from "@mui/material";
-import { Cart } from "@/base/types/cart";
-import { useState } from "react";
+import { getProductRating } from "@/components/element/product/card/helper/getProductRating";
+import { CartEntity } from "@/base/types/cart";
+import ProductColor from "@/components/element/product/color/color";
+import { AttributesEntity } from "@/base/types/product";
+import ProductQty from "@/components/element/product/quantity/quantity";
 
-export const defaultCart: Cart = {
+import { ProductDetailProps } from "./types";
+import locale from "./locale/en.json";
+
+export const defaultCart: CartEntity = {
   id: "",
   name: "",
   description: "",
@@ -15,7 +20,7 @@ export const defaultCart: Cart = {
   brand: "",
   quantity: 0,
   category: "",
-  selectedImage: {
+  selectedAttributes: {
     color: "",
     colorCode: "",
     image: "",
@@ -23,11 +28,11 @@ export const defaultCart: Cart = {
 };
 
 export default function ProductDetail({ product }: ProductDetailProps) {
-  const [cart, setCart] = useState<Cart>({
+  const [cartItem, setCartItem] = useState<CartEntity>({
     ...product,
     quantity: 1,
-    selectedImage: {
-      ...(product?.images?.[0] || { color: "", colorCode: "", image: "" }),
+    selectedAttributes: {
+      ...(product?.attributes?.[0] || { color: "", colorCode: "", image: "" }),
     },
   });
 
@@ -36,6 +41,31 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   );
 
   const productStock = product.inStock ? "In stock" : "Out of stock";
+
+  const handleSelectColor = useCallback((attribute: AttributesEntity) => {
+    setCartItem((prevState) => ({
+      ...prevState,
+      selectedAttributes: attribute,
+    }));
+  }, []);
+
+  const handleQtyIncrease = useCallback(() => {
+    if (cartItem.quantity === 80) return;
+
+    setCartItem((prevState) => ({
+      ...prevState,
+      quantity: Math.max(Number(prevState?.quantity) + 1, 1),
+    }));
+  }, [cartItem.quantity]);
+
+  const handleQtyDecrease = useCallback(() => {
+    if (cartItem.quantity === 1) return;
+
+    setCartItem((prevState) => ({
+      ...prevState,
+      quantity: Number(prevState?.quantity) - 1,
+    }));
+  }, [cartItem.quantity]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -53,18 +83,29 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </div>
         <div className="mt-4 separator flex flex-col gap-4">
           <div>
-            <span className="font-semibold">CATEGORY:</span> {product.category}
+            <span className="font-semibold">{locale.category}:</span>{" "}
+            {product.category}
           </div>
           <div>
-            <span className="font-semibold">BRAND:</span> {product.brand}
+            <span className="font-semibold">{locale.brand}:</span>{" "}
+            {product.brand}
           </div>
           <div data-in-stock={String(product?.inStock)} className="stock">
             {productStock}
           </div>
         </div>
 
-        <div>color</div>
-        <div>quantity</div>
+        <ProductColor
+          cartItem={cartItem}
+          attributes={product.attributes as AttributesEntity[]}
+          colorSelectHandler={handleSelectColor}
+        />
+        <ProductQty
+          cartItem={cartItem}
+          qtyCounterType="product"
+          handleQtyIncrease={handleQtyIncrease}
+          handleQtyDecrease={handleQtyDecrease}
+        />
         <div>Add to cart</div>
       </div>
     </div>

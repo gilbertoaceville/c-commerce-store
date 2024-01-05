@@ -20,7 +20,7 @@ export default function ProductCard({ data }: ProductCardProps) {
         <div className="aspect-square overflow-hidden relative w-full mt-4">
           <Image
             fill
-            src={data?.images?.[0]?.image || ""}
+            src={data?.attributes?.[0]?.image || ""}
             alt={productName}
             className="w-full h-full object-contain"
           />

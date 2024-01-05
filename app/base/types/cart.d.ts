@@ -1,6 +1,6 @@
-import { ProductsEntity, ImagesEntity } from "./product.d";
+import { ProductsEntity, AttributesEntity } from "./product.d";
 
-export interface Cart
-  extends Omit<ProductsEntity, "inStock" | "images" | "reviews"> {
-  selectedImage: ImagesEntity;
+export interface CartEntity
+  extends Omit<ProductsEntity, "inStock" | "attributes" | "reviews"> {
+  selectedAttributes: AttributesEntity;
 }

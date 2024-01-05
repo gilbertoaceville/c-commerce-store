@@ -9,11 +9,11 @@ export interface ProductsEntity {
   brand: string;
   category: string;
   inStock: boolean;
-  images?: ImagesEntity[];
+  attributes?: AttributesEntity[];
   reviews?: ReviewsEntity[];
   quantity?: number;
 }
-export interface ImagesEntity {
+export interface AttributesEntity {
   color: string;
   colorCode: string;
   image: string;

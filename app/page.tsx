@@ -1,7 +1,7 @@
 import Container from "@/components/layout/container/container";
 import Banner from "@/components/element/banner/banner";
 import data from "@/base/lib/products.json";
-import ProductCard from "@/components/element/product-card/product-card";
+import ProductCard from "@/components/element/product/card/card";
 
 export default function Home() {
   return (
