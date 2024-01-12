@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { MdCheckCircle } from "react-icons/md";
 
 import { Rating } from "@mui/material";
 import { getProductRating } from "@/components/element/product/card/helper/getProductRating";
@@ -13,6 +14,9 @@ import { ProductDetailProps } from "./types";
 import locale from "./locale/en.json";
 import Button from "@/components/element/button/button";
 import ProductImages from "@/components/element/product/images/images";
+import { useCartContext } from "@/providers/cart";
+import Link from "next/link";
+import { MAX_CART_PRODUCT } from "@/base/utils/constants/const";
 
 export const defaultCart: CartEntity = {
   id: "",
@@ -22,6 +26,7 @@ export const defaultCart: CartEntity = {
   brand: "",
   quantity: 0,
   category: "",
+  stock: 1,
   selectedAttributes: {
     color: "",
     colorCode: "",
@@ -30,6 +35,9 @@ export const defaultCart: CartEntity = {
 };
 
 export default function ProductDetail({ product }: ProductDetailProps) {
+  const { addProductToCart, cartProducts } = useCartContext();
+
+  // used to switch between product images and selected color image
   const [cartItem, setCartItem] = useState<CartEntity>({
     ...product,
     quantity: 1,
@@ -52,13 +60,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   }, []);
 
   const handleQtyIncrease = useCallback(() => {
-    if (cartItem.quantity === 80) return;
+    const maxCount = cartItem.stock || MAX_CART_PRODUCT;
+    if (cartItem.quantity === maxCount) return;
 
     setCartItem((prevState) => ({
       ...prevState,
       quantity: Math.max(Number(prevState?.quantity) + 1, 1),
     }));
-  }, [cartItem.quantity]);
+  }, [cartItem.quantity, cartItem.stock]);
 
   const handleQtyDecrease = useCallback(() => {
     if (cartItem.quantity === 1) return;
@@ -68,6 +77,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       quantity: Number(prevState?.quantity) - 1,
     }));
   }, [cartItem.quantity]);
+
+  const isProductInCart = useMemo(
+    () => cartProducts.some((cartProduct) => cartProduct.id === product.id), // or [].findIndex((cartProduct) => cartProduct.id === product.id) > -1
+    [cartProducts, product.id]
+  );
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -101,19 +115,35 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
         </div>
 
-        <ProductColor
-          cartItem={cartItem}
-          attributes={product.attributes as AttributesEntity[]}
-          colorSelectHandler={handleSelectAttribute}
-        />
-        <ProductQty
-          cartItem={cartItem}
-          qtyCounterType="product"
-          handleQtyIncrease={handleQtyIncrease}
-          handleQtyDecrease={handleQtyDecrease}
-        />
-        <div className="max-w-[300px] mt-4">
-          <Button label={locale.button} outline />
+        <div className={isProductInCart ? "block" : "hidden"}>
+          <p className="mb-2 flex items-center gap-1">
+            <MdCheckCircle className="text-teal-400" size={20} />
+            <span>{locale.addToCartText}</span>
+          </p>
+          <Link href="/cart" className="max-w-[300px] mt-4 block">
+            <Button label={locale.cartLabel} outline />
+          </Link>
+        </div>
+
+        <div className={isProductInCart ? "hidden" : "block"}>
+          <ProductColor
+            cartItem={cartItem}
+            attributes={product.attributes as AttributesEntity[]}
+            colorSelectHandler={handleSelectAttribute}
+          />
+          <ProductQty
+            cartItem={cartItem}
+            qtyCounterType="product"
+            handleQtyIncrease={handleQtyIncrease}
+            handleQtyDecrease={handleQtyDecrease}
+          />
+          <div className="max-w-[300px] mt-4">
+            <Button
+              label={locale.button}
+              outline
+              onClick={() => addProductToCart(cartItem)}
+            />
+          </div>
         </div>
       </div>
     </div>

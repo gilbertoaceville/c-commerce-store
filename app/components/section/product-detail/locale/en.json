@@ -1,5 +1,7 @@
 {
     "category": "CATEGORY",
     "brand": "BRAND",
-    "button": "Add to cart"
+    "button": "Add to cart",
+    "cartLabel": "View Cart",
+    "addToCartText": "Product added to cart"
 }

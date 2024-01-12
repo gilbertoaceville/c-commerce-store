@@ -1,0 +1,15 @@
+{
+  "emptyCartText": "Your cart is empty",
+  "startText": "Begin Shopping",
+  "continueText": "Continue Shopping",
+  "cartTitle": "Shopping Cart",
+  "product": "Product",
+  "price": "Price",
+  "qty": "Quantity",
+  "total": "Total",
+  "clear": "Clear",
+  "subtotal": "Subtotal",
+  "cartShipping": "Shipping calculation at checkout",
+  "checkout": "Checkout",
+  "remove": "Remove"
+}

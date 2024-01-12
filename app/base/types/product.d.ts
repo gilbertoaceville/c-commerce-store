@@ -9,6 +9,7 @@ export interface ProductsEntity {
   brand: string;
   category: string;
   inStock: boolean;
+  stock: number;
   attributes?: AttributesEntity[];
   reviews?: ReviewsEntity[];
   quantity?: number;

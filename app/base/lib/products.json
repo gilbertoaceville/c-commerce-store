@@ -8,6 +8,7 @@
       "brand": "apple",
       "category": "Phone",
       "inStock": true,
+      "stock": 40,
       "attributes": [
         {
           "color": "White",
@@ -30,6 +31,7 @@
       "brand": "logitech",
       "category": "Accesories",
       "inStock": true,
+      "stock": 31,
       "attributes": [
         {
           "color": "Black",
@@ -67,6 +69,7 @@
       "brand": "Apple",
       "category": "Phone",
       "inStock": true,
+      "stock": 80,
       "attributes": [
         {
           "color": "Black",
@@ -133,6 +136,7 @@
       "brand": "logitech",
       "category": "Accesories",
       "inStock": true,
+      "stock": 13,
       "attributes": [
         {
           "color": "Graphite",

@@ -6,6 +6,7 @@ import RootTemplate from "@/components/template/rootTemplate";
 import Provider from "@/providers/provider";
 
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -25,6 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(montserrat.className, "text-primary")}>
+        <Toaster
+          toastOptions={{
+            style: { background: "rgb(45 212 191)", color: "#000000" },
+          }}
+        />
         <Provider>
           <RootTemplate>{children}</RootTemplate>
         </Provider>
