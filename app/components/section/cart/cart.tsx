@@ -9,9 +9,10 @@ import Button from "@/components/element/button/button";
 
 import CartItem from "./component/cart-item/cart-item";
 import locale from "./locale/en.json";
+import { formatPrice } from "@/base/utils/functions/formatPrice";
 
 export default function CartSection() {
-  const { cartProducts } = useCartContext();
+  const { cartProducts, clearCart, cartTotalPrice } = useCartContext();
 
   if (!cartProducts || cartProducts?.length === 0) {
     return (
@@ -42,12 +43,12 @@ export default function CartSection() {
       </div>
       <div className="border-t-[1.5px] border-slate-800 py-4 flex justify-between gap-4">
         <div className="w-[90px]">
-          <Button label={locale.clear} small outline />
+          <Button label={locale.clear} small outline onClick={clearCart} />
         </div>
         <div className="text-sm flex flex-col gap-1 items-start">
           <div className="flex justify-between w-full text-base font-semibold">
             <span>{locale.subtotal}</span>
-            <span>$1000</span>
+            <span>{formatPrice(cartTotalPrice ?? 0)}</span>
           </div>
           <p className="text-foreground">{locale.cartShipping}</p>
           <Button label={locale.checkout} />

@@ -1,0 +1,11 @@
+{
+  "signup": "Sign up",
+  "loading": "Loading...",
+  "register": "Register",
+  "existingAccount": "Already have an account?",
+  "signin": "Sign in",
+  "login": "Login",
+  "startWithGoogle": "Sign up with Google",
+  "continueWithGoogle": "Continue with Google",
+  "noAccount": "Don't have an account?"
+}

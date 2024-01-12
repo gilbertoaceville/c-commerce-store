@@ -9,7 +9,8 @@ import ProductQty from "@/components/element/product/quantity/quantity";
 import { useCartContext } from "@/providers/cart";
 
 export default function CartItem({ item }: { item: CartEntity }) {
-  const { removeProductFromCart } = useCartContext();
+  const { removeProductFromCart, increaseQtyInCart, decreaseQtyInCart } =
+    useCartContext();
   const total = formatPrice(item.price * Number(item.quantity));
   return (
     <div className="grid grid-cols-5 text-xs md:text-sm gap-4 border-t-[1.5px] border-slate-800 py-4 items-center">
@@ -49,7 +50,12 @@ export default function CartItem({ item }: { item: CartEntity }) {
         <div className="justify-self-center">{formatPrice(item.price)}</div>
       )}
       <div className="justify-self-center">
-        <ProductQty qtyCounterType="cart" cartItem={item} />
+        <ProductQty
+          qtyCounterType="cart"
+          cartItem={item}
+          handleQtyIncrease={() => increaseQtyInCart?.(item)}
+          handleQtyDecrease={() => decreaseQtyInCart?.(item)}
+        />
       </div>
       <div className="justify-self-end font-semibold">{total}</div>
     </div>

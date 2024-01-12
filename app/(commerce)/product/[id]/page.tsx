@@ -3,14 +3,30 @@ import Container from "@/components/layout/container/container";
 import ProductDetail from "@/components/section/product-detail/product-detail";
 import data from "@/base/lib/products.json";
 import ListRating from "@/components/section/list-rating/list-rating";
+import { ProductsEntity } from "@/base/types/product";
 
 export default function Product({ params }: IParams) {
+  const product = data.products?.find(
+    (item) => item.id === params.id
+  ) as ProductsEntity;
+
+  if (!product) {
+    return (
+      <Container className="p-8">
+        <div className="text-2xl flex justify-center items-center text-red-300">
+          Product is not found
+        </div>
+      </Container>
+    );
+  }
+
   return (
     <Container className="p-8">
-      <ProductDetail product={data.products[2]} />
+      <ProductDetail product={product} />
+
       <div className="flex flex-col mt-20 gap-4">
         <div>Add Rating</div>
-        <ListRating product={data.products[2]} />
+        <ListRating product={product} />
       </div>
     </Container>
   );

@@ -154,6 +154,7 @@
       "brand": "Nerunsa",
       "category": "Watch",
       "inStock": true,
+      "stock": 3,
       "attributes": [
         {
           "color": "Black",

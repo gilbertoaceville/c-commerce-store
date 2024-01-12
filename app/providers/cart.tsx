@@ -1,26 +1,25 @@
-import { CartEntity } from "@/base/types/cart";
-import { cacheKey } from "@/base/utils/constants/const";
 import React, {
   createContext,
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import toast from "react-hot-toast";
+import { CartEntity } from "@/base/types/cart";
+import { cacheKey } from "@/base/utils/constants/const";
 
 interface CartContextProps {
   cartTotalQty?: number;
+  cartTotalPrice?: number;
   cartProducts: CartEntity[];
   addProductToCart: (product: CartEntity) => void;
   removeProductFromCart?: (product: CartEntity) => void;
   increaseQtyInCart?: (product: CartEntity) => void;
   decreaseQtyInCart?: (product: CartEntity) => void;
+  clearCart?: () => void;
 }
-
-// interface Props {
-//   [propname: string]: any;
-// }
 
 export const CartContext = createContext<CartContextProps | null>(null);
 
@@ -30,7 +29,6 @@ export default function CartProvider({
   children: React.ReactNode;
 }) {
   const [cartProducts, setCartProducts] = useState<CartEntity[]>([]);
-  const [cartTotalQty, setCartTotalQty] = useState(1);
 
   const addProductToCart = useCallback((product: CartEntity) => {
     setCartProducts((prevProduct) => {
@@ -80,20 +78,60 @@ export default function CartProvider({
           return updatedCart;
         });
       }
-
-      // if(cartProducts) {
-      //   const updatedItemIndex = cartProducts.findIndex((item) => item.id === product.id);
-
-      //   if(updatedItemIndex !== -1) {
-      //     const updatedCart = [...cartProducts]
-      //     updatedCart[updatedItemIndex].quantity = ++updatedCart?.[updatedItemIndex]?.quantity;
-      // localStorage.setItem(cacheKey, JSON.stringify(updatedCart));
-      //     setCartProducts(updatedCart);
-      //   }
-      // }
     },
     [cartProducts]
   );
+
+  const decreaseQtyInCart = useCallback(
+    (product: CartEntity) => {
+      if (product.quantity === 1) {
+        toast.error("Product quantity cannot be less than 1", {
+          id: "quantity-error",
+        });
+        return;
+      }
+
+      if (cartProducts) {
+        setCartProducts((prevProduct) => {
+          const updatedCart = prevProduct?.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: Math.max((item.quantity ?? 0) - 1, 1) }
+              : item
+          );
+
+          localStorage.setItem(cacheKey, JSON.stringify(updatedCart));
+
+          return updatedCart;
+        });
+      }
+    },
+    [cartProducts]
+  );
+
+  const clearCart = useCallback(() => {
+    setCartProducts([]);
+    localStorage.removeItem(cacheKey);
+    toast.success("Cart cleared successfully", {
+      id: "clear-cart",
+    });
+    return;
+  }, []);
+
+  const { totalPrice, totalQty } = useMemo(() => {
+    return cartProducts?.reduce(
+      (acc, product) => {
+        const subtotal = product.price * (product.quantity ?? 0);
+
+        acc.totalPrice += subtotal;
+        acc.totalQty += product.quantity ?? 0;
+        return acc;
+      },
+      {
+        totalPrice: 0,
+        totalQty: 0,
+      }
+    );
+  }, [cartProducts]) ?? { totalPrice: 0, totalQty: 0 };
 
   useEffect(() => {
     const cartItems = localStorage.getItem(cacheKey);
@@ -103,10 +141,14 @@ export default function CartProvider({
   }, []);
 
   const cartObj: CartContextProps = {
-    cartTotalQty,
+    cartTotalQty: totalQty,
+    cartTotalPrice: totalPrice,
     cartProducts,
     addProductToCart,
     removeProductFromCart,
+    increaseQtyInCart,
+    decreaseQtyInCart,
+    clearCart,
   };
 
   return (

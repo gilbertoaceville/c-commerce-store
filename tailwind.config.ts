@@ -14,6 +14,12 @@ module.exports = {
         secondary: "rgb(var(--color-secondary))",
         tertiary: "rgb(var(--color-tertiary))",
         foreground: "rgb(var(--color-foreground))",
+        alpha: "rgb(var(--color-alpha))", 
+      },
+      backgroundColor: {
+        tertiary: "rgb(var(--color-tertiary))",
+        primary: "rgb(var(--color-primary))",
+        foreground: "rgb(var(--color-foreground))",
       },
       backgroundImage: {
         "gradient-primary":

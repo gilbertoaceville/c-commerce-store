@@ -6,6 +6,7 @@
   --color-primary: 52, 66, 86;
   --color-secondary: 214, 219, 220;
   --color-accent: 255, 255, 255;
+  --color-alpha: 203, 213, 225;
   --color-foreground: 31, 31, 31;
   --color-tertiary: 241 245 249;
   --color-gradient-primary: 26, 26, 26;
@@ -21,6 +22,7 @@
     --color-foreground: 241, 241, 241;
     --color-gradient-primary: 24, 34, 55;
     --color-gradient-secondary: 37, 51, 82;
+    --color-alpha: 64, 64, 64;
     --background-gradient: linear-gradient(
       to top,
       rgb(24, 34, 55),
