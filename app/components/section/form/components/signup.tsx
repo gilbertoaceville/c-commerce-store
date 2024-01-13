@@ -4,18 +4,19 @@ import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { redirect, useRouter } from "next/navigation";
 
 import Subject from "@/components/element/subject/subject";
 import Input from "@/components/element/input/input";
 import Button from "@/components/element/button/button";
 
 import locale from "../locale/en.json";
-import Link from "next/link";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { AuthFormProps } from "./types";
 
-export default function SignupForm() {
+export default function SignupForm({ currentUser }: AuthFormProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -77,6 +78,10 @@ export default function SignupForm() {
 
   const buttonText = isLoading ? locale.loading : locale.register;
 
+  if (currentUser) {
+    return redirect("/");
+  }
+
   return (
     <>
       <Subject title={locale.signup} />
@@ -86,6 +91,7 @@ export default function SignupForm() {
           outline
           label={locale.startWithGoogle}
           icon={AiOutlineGoogle}
+          onClick={() => signIn("google")}
         />
       </div>
       <hr className="w-full h-px border-alpha" />
