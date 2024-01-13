@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { AiOutlineGoogle } from "react-icons/ai";
+import { signIn } from "next-auth/react";
 
 import Subject from "@/components/element/subject/subject";
 import Input from "@/components/element/input/input";
@@ -10,8 +11,12 @@ import Button from "@/components/element/button/button";
 
 import locale from "../locale/en.json";
 import Link from "next/link";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function SignupForm() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -26,9 +31,48 @@ export default function SignupForm() {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = function (data) {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
+
+    axios
+      .post("/api/signup", data)
+      .then(() => {
+        toast.success("Account is created successfully", {
+          id: "create-account",
+        });
+
+        signIn("credentials", {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+          callbackUrl: "/cart",
+        })
+          .then((callback) => {
+            if (callback?.ok) {
+              router.push("/cart");
+              router.refresh();
+              toast.success("Login successfully", {
+                id: "login",
+              });
+            }
+
+            if (callback?.error) {
+              toast.error(callback.error, {
+                id: "login",
+              });
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            toast.error("Failed to login", { id: "login" });
+            return;
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Failed to create account", { id: "create-account" });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const buttonText = isLoading ? locale.loading : locale.register;

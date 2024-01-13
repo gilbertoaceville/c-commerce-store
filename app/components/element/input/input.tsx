@@ -14,7 +14,7 @@ export default function Input({
   return (
     <div className="w-full relative">
       <input
-        autoComplete="off"
+        // autoComplete="off"
         id={id}
         type={type}
         disabled={disabled}
