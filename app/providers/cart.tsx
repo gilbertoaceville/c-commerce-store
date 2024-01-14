@@ -33,6 +33,7 @@ export default function CartProvider({
   const [cartProducts, setCartProducts] = useState<CartEntity[]>([]);
   const [paymentIntent, setPaymentIntent] = useState<string | null>(null);
 
+  // add product to cart
   const addProductToCart = useCallback((product: CartEntity) => {
     setCartProducts((prevProduct) => {
       const updatedCart = prevProduct ? [...prevProduct, product] : [product];
@@ -46,6 +47,7 @@ export default function CartProvider({
     });
   }, []);
 
+  // remove product from cart
   const removeProductFromCart = useCallback((product: CartEntity) => {
     setCartProducts((prevProduct) => {
       const updatedCart = prevProduct?.filter((item) => item.id !== product.id);
@@ -59,6 +61,7 @@ export default function CartProvider({
     });
   }, []);
 
+  // increase quantity of product in cart
   const increaseQtyInCart = useCallback(
     (product: CartEntity) => {
       if (product.quantity === product.stock) {
@@ -85,6 +88,7 @@ export default function CartProvider({
     [cartProducts]
   );
 
+  // decrease quantity of product in cart
   const decreaseQtyInCart = useCallback(
     (product: CartEntity) => {
       if (product.quantity === 1) {
@@ -111,6 +115,7 @@ export default function CartProvider({
     [cartProducts]
   );
 
+  // remove all products from cart
   const clearCart = useCallback(() => {
     setCartProducts([]);
     localStorage.removeItem(cacheKey);
@@ -120,6 +125,7 @@ export default function CartProvider({
     return;
   }, []);
 
+  // retrieve total amount and quantity from cartProducts
   const { totalPrice, totalQty } = useMemo(() => {
     return cartProducts?.reduce(
       (acc, product) => {
@@ -136,6 +142,11 @@ export default function CartProvider({
     );
   }, [cartProducts]) ?? { totalPrice: 0, totalQty: 0 };
 
+  /**
+   * @value => payment intent returned from creating payment intent via stripe("/api/create-payment-intent")
+   * handle paymentIntent in localStorage and context. 
+   * This is used to store paymentIntent in localStorage and use it in checkout page. 
+   */
   const handlePaymentIntent = useCallback((value: string | null) => {
     setPaymentIntent(value);
     localStorage.setItem(cachePaymentIntent, JSON.stringify(value));
@@ -148,8 +159,11 @@ export default function CartProvider({
     }
 
     // get paymentIntent from localStorage
-    const stringifiedPaymentIntent: any = localStorage.getItem(cachePaymentIntent);
-    const parsedPaymentIntent: string | null = JSON.parse(stringifiedPaymentIntent);
+    const stringifiedPaymentIntent: any =
+      localStorage.getItem(cachePaymentIntent);
+    const parsedPaymentIntent: string | null = JSON.parse(
+      stringifiedPaymentIntent
+    );
 
     setPaymentIntent(parsedPaymentIntent);
   }, []);
