@@ -39,8 +39,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
   // used to switch between product images and selected color image
   const [cartItem, setCartItem] = useState<CartEntity>({
-    ...product,
-    quantity: 1,
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    brand: product.brand,
+    quantity: product.quantity || 1,
+    category: product.category,
+    stock: product.stock,
     selectedAttributes: {
       ...(product?.attributes?.[0] || { color: "", colorCode: "", image: "" }),
     },

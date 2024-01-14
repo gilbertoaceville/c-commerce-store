@@ -8,17 +8,19 @@ import React, {
 } from "react";
 import toast from "react-hot-toast";
 import { CartEntity } from "@/base/types/cart";
-import { cacheKey } from "@/base/utils/constants/const";
+import { cacheKey, cachePaymentIntent } from "@/base/utils/constants/const";
 
 interface CartContextProps {
   cartTotalQty?: number;
   cartTotalPrice?: number;
   cartProducts: CartEntity[];
+  paymentIntent: string | null;
   addProductToCart: (product: CartEntity) => void;
   removeProductFromCart?: (product: CartEntity) => void;
   increaseQtyInCart?: (product: CartEntity) => void;
   decreaseQtyInCart?: (product: CartEntity) => void;
   clearCart?: () => void;
+  handlePaymentIntent?: (paymentIntent: string | null) => void;
 }
 
 export const CartContext = createContext<CartContextProps | null>(null);
@@ -29,6 +31,7 @@ export default function CartProvider({
   children: React.ReactNode;
 }) {
   const [cartProducts, setCartProducts] = useState<CartEntity[]>([]);
+  const [paymentIntent, setPaymentIntent] = useState<string | null>(null);
 
   const addProductToCart = useCallback((product: CartEntity) => {
     setCartProducts((prevProduct) => {
@@ -133,22 +136,35 @@ export default function CartProvider({
     );
   }, [cartProducts]) ?? { totalPrice: 0, totalQty: 0 };
 
+  const handlePaymentIntent = useCallback((value: string | null) => {
+    setPaymentIntent(value);
+    localStorage.setItem(cachePaymentIntent, JSON.stringify(value));
+  }, []);
+
   useEffect(() => {
     const cartItems = localStorage.getItem(cacheKey);
     if (cartItems) {
       setCartProducts(JSON.parse(cartItems));
     }
+
+    // get paymentIntent from localStorage
+    const stringifiedPaymentIntent: any = localStorage.getItem(cachePaymentIntent);
+    const parsedPaymentIntent: string | null = JSON.parse(stringifiedPaymentIntent);
+
+    setPaymentIntent(parsedPaymentIntent);
   }, []);
 
   const cartObj: CartContextProps = {
     cartTotalQty: totalQty,
     cartTotalPrice: totalPrice,
     cartProducts,
+    paymentIntent,
     addProductToCart,
     removeProductFromCart,
     increaseQtyInCart,
     decreaseQtyInCart,
     clearCart,
+    handlePaymentIntent,
   };
 
   return (
