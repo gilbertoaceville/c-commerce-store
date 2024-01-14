@@ -1,0 +1,7 @@
+{
+  "loading": "Loading...",
+  "stripeError": "Stripe is detecting an error, please try again",
+  "stripeErrorPromise": "Something went wrong with payment intent",
+  "paymentSuccess": "Payment successful",
+  "viewOrders": "View your Orders"
+}

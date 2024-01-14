@@ -1,5 +1,4 @@
-import { IUser } from "@/base/types/user";
-
-export interface AuthFormProps {
-  currentUser: IUser | null;
+export interface CheckoutFormProps {
+  clientSecret: string;
+  handlePaymentSuccess?: (value: boolean) => void;
 }

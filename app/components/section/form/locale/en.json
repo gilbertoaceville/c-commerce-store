@@ -8,5 +8,13 @@
   "startWithGoogle": "Sign up with Google",
   "continueWithGoogle": "Continue with Google",
   "noAccount": "Don't have an account?",
-  "loginRedirect": "Logged In! Redirecting..."
+  "loginRedirect": "Logged In! Redirecting...",
+  "checkout": "Checkout",
+  "checkoutSuccess": "Checkout Payment successful",
+  "checkoutError": "Checkout Payment failed",
+  "checkoutErrorCallback": "An error occurred during checkout",
+  "paymentTitle": "Payment Information",
+  "addressTitle": "Address Information",
+  "processing": "Processing...",
+  "payNow": "Pay Now"
 }

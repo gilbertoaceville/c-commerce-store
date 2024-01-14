@@ -53,17 +53,6 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-  logger: {
-    error(code, metadata) {
-      console.error(code, metadata);
-    },
-    warn(code) {
-      console.warn(code);
-    },
-    debug(code, metadata) {
-      console.debug(code, metadata);
-    },
-  },
   pages: {
     signIn: "/signin",
   },

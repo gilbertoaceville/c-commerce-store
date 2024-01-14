@@ -9,14 +9,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { redirect, useRouter } from "next/navigation";
 
+import { CurrentUserProps } from "@/base/types/user";
 import Subject from "@/components/element/subject/subject";
 import Input from "@/components/element/input/input";
 import Button from "@/components/element/button/button";
 
 import locale from "../locale/en.json";
-import { AuthFormProps } from "./types";
 
-export default function SignupForm({ currentUser }: AuthFormProps) {
+export default function SignupForm({ currentUser }: CurrentUserProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 

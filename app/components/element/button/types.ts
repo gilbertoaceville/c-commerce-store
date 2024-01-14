@@ -7,4 +7,5 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   outline?: boolean;
   custom?: string;
   icon?: IconType;
+  type?: "button" | "submit" | "reset";
 }

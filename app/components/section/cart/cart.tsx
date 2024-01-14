@@ -10,8 +10,9 @@ import Button from "@/components/element/button/button";
 import CartItem from "./component/cart-item/cart-item";
 import locale from "./locale/en.json";
 import { formatPrice } from "@/base/utils/functions/formatPrice";
+import { CurrentUserProps } from "@/base/types/user";
 
-export default function CartSection() {
+export default function CartSection({ currentUser }: CurrentUserProps) {
   const { cartProducts, clearCart, cartTotalPrice } = useCartContext();
 
   if (!cartProducts || cartProducts?.length === 0) {
@@ -51,7 +52,9 @@ export default function CartSection() {
             <span>{formatPrice(cartTotalPrice ?? 0)}</span>
           </div>
           <p className="text-foreground">{locale.cartShipping}</p>
-          <Button label={locale.checkout} />
+          <Link href="/checkout" className="w-full">
+            <Button label={locale.checkout} outline={!currentUser} />
+          </Link>
           <Link href="/" className="flex items-center gap-1 mt-2">
             <MdArrowBack />
             <span>{locale.continueText}</span>

@@ -6,3 +6,7 @@ export interface IUser
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface CurrentUserProps {
+  currentUser: IUser | null;
+}

@@ -8,6 +8,7 @@ export default function Button({
   disabled,
   custom = "",
   icon: Icon,
+  type = "button",
   ...props
 }: ButtonProps) {
   return (
@@ -15,6 +16,7 @@ export default function Button({
       disabled={disabled}
       data-small={String(small)}
       data-with-outline={String(outline)}
+      type={type}
       className={clsx(
         "cta disabled:opacity-70 disabled:cursor-not-allowed disabled:pointer-events-none rounded-md transition opacity-80 hover:opacity-100 w-full border-tertiary flex items-center justify-center gap-2 @apply text-base font-semibold py-3 px-4 border-2 bg-primary text-secondary",
         custom
