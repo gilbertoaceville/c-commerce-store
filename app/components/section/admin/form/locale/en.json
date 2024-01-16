@@ -1,0 +1,18 @@
+{
+  "addAProduct": "Add a Product",
+  "checkboxLabel": "Product in stock",
+  "categoryText": "Choose a Category",
+  "categoryTextError": "Please select a category",
+  "attributesTitle": "Choose available product colors and upload respective images",
+  "attributesText": "An image must be uploaded for each color selected! Color selections without its respective image will not be considered!",
+  "attributesTextError": "Please select at least one attribute",
+  "dropText": "Drop your image here or click to upload...",
+  "cancel": "Cancel",
+  "selectboxText": "Select the checkbox",
+  "addProduct": "Add Product",
+  "loading": "Loading...",
+  "createProductText": "Creating product, do not close browser or refresh the page, this may take a while",
+  "imageUploadError": "Error uploading images",
+  "productCreatedText": "Product has been successfully created",
+  "productCreatedError": "Error creating product"
+}

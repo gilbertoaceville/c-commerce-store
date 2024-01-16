@@ -1,7 +1,8 @@
 import { HTMLInputTypeAttribute } from "react";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
-export interface InputProps extends React.HTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
+export interface InputProps
+  extends React.HTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   id: string;
   label: string;
   required?: boolean;
@@ -9,4 +10,9 @@ export interface InputProps extends React.HTMLAttributes<HTMLInputElement | HTML
   type?: HTMLInputTypeAttribute;
   register: UseFormRegister<FieldValues>;
   errors?: FieldErrors;
+}
+
+export interface CheckboxProps
+  extends Omit<InputProps, "required" | "type"> {
+  checked?: boolean;
 }

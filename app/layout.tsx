@@ -16,6 +16,9 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Bluecube Store",
   description: "Complex e-commerce store",
+  keywords: "cube, bluecube, store, e-commerce, web development",
+  creator: "Gilbert James",
+  applicationName: "Bluecube Store",
 };
 
 export default function RootLayout({
