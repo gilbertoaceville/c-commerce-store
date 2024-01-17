@@ -108,7 +108,7 @@ export function getOrderColumns(cellProps: GridColDef): GridColDef[] {
             />
           ) : params.row?.deliveryStatus === locale.delivered ? (
             <ContentStatus
-              text={locale.delivered.toLocaleUpperCase()}
+              text={locale.delivered}
               className="bg-green-500 text-green-200"
               icon={MdDone}
             />
