@@ -1,11 +1,7 @@
 "use client";
 
 import { DataGrid } from "@mui/x-data-grid";
-import {
-  MdDeliveryDining,
-  MdDone,
-  MdRemoveRedEye,
-} from "react-icons/md";
+import { MdDeliveryDining, MdDone, MdRemoveRedEye } from "react-icons/md";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -37,7 +33,15 @@ function ManageOrdersSection({ orders }: ManageOrdersProps) {
     }));
   }
 
+  const findOrder = (id: string) => orders?.find((order) => order.id === id);
+
   async function dispatchHandler(id: string) {
+    const order = findOrder(id)
+    if (order?.deliveryStatus === locale.dispatched) {
+      toast.error("Already dispatched");
+      return;
+    }
+
     try {
       const response = await axios.put("/api/order", {
         id,
@@ -55,6 +59,12 @@ function ManageOrdersSection({ orders }: ManageOrdersProps) {
   }
 
   async function deliveredHandler(id: string) {
+    const order = findOrder(id);
+    if (order?.deliveryStatus === locale.delivered) {
+      toast.error("Order already delivered");
+      return;
+    }
+
     try {
       const response = await axios.put("/api/order", {
         id,
