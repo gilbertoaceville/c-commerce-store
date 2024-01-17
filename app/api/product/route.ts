@@ -40,3 +40,29 @@ export async function POST(req: Request) {
 
   return NextResponse.json(product);
 }
+
+export async function PUT(req: Request) {
+  const user = await getUser();
+
+  if (!user || user.role !== "ADMIN") {
+    return NextResponse.json(
+      {
+        message: "You are not authorized to perform this action",
+      },
+      { status: 401 }
+    );
+  }
+
+  const { id, inStock } = await req.json();
+
+  const product = await prisma.product.update({
+    where: {
+      id,
+    },
+    data: {
+      inStock,
+    },
+  });
+
+  return NextResponse.json(product);
+}

@@ -25,7 +25,7 @@ export default function CheckoutForm({
   const { cartTotalPrice, clearCart, handlePaymentIntent } = useCartContext();
   const [isLoading, setIsLoading] = useState(false);
 
-  const price = formatPrice(cartTotalPrice as number);
+  const price = formatPrice(cartTotalPrice as number, "symbol");
 
   useEffect(() => {
     if (!stripe) {

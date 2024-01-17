@@ -1,7 +1,6 @@
 import { getUser } from "@/base/actions/getUser";
 import Container from "@/components/layout/container/container";
 import AddProductsForm from "@/components/section/admin/form/add-products/add-product";
-import FormContainer from "@/components/section/form/container";
 import locale from "../locale/en.json";
 
 export default async function AddProducts() {

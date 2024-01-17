@@ -1,12 +1,24 @@
-import { numericStringRegExp } from "@/base/utils/constants/regex";
+export function formatPrice(
+  price: number | string,
+  format: "code" | "symbol" = "code",
+  currencyCode = "USD",
+  locale = "en-US"
+): string {
+  if (!price) return "";
 
-export function formatPrice(price: number | string, currencyCode = "USD", locale = "en-US"): string {
-  const priceString = price?.toString() || "0";
+  const formattedNumber = new Intl.NumberFormat(locale).format(Number(price));
 
-  // if price is a string containing only numbers
-  if (numericStringRegExp.test(priceString)) {
-    return new Intl.NumberFormat(locale).format(Number(priceString)) + " " + currencyCode;
+  if (format === "code") {
+    return `${formattedNumber} ${currencyCode}`;
   }
 
-  return priceString;
+  if (format === "symbol") {
+    const formattedCurrency = new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: currencyCode,
+    }).format(Number(price));
+    return formattedCurrency;
+  }
+
+  return "";
 }

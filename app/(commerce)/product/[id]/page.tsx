@@ -4,9 +4,12 @@ import ProductDetail from "@/components/section/product-detail/product-detail";
 import data from "@/base/lib/products.json";
 import ListRating from "@/components/section/list-rating/list-rating";
 import { ProductsEntity } from "@/base/types/product";
+import { getProducts } from "@/base/actions/getProducts";
 
-export default function Product({ params }: IParams) {
-  const product = data.products?.find(
+export default async function Product({ params }: IParams) {
+  const products = await getProducts({ category: null });
+
+  const product = products?.find(
     (item) => item.id === params.id
   ) as ProductsEntity;
 

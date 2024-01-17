@@ -1,0 +1,10 @@
+{
+  "title": "Manage Products",
+  "inStock": "In Stock",
+  "outOfStock": "Out of Stock",
+  "successMessage": "Stock updated successfully",
+  "errorMessage": "Error while updating stock",
+  "successDeleteMessage": "Product is deleted successfully",
+  "errorDeleteMessage": "Error while deleting product",
+  "deleteMessage": "Deleting product! Please wait..."
+}

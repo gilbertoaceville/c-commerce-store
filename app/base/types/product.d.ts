@@ -5,7 +5,7 @@ export interface ProductsEntity {
   id: string;
   name: string;
   description: string;
-  price: number;
+  price: number | string;
   brand: string;
   category: string;
   inStock: boolean;
@@ -25,8 +25,8 @@ export interface ReviewsEntity {
   productId: string;
   rating: number;
   comment: string;
-  createdDate: string;
-  user: User;
+  createdDate: string | Date;
+  user: User | any;
 }
 export interface User {
   id: string;
@@ -38,4 +38,9 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   role: string;
+}
+
+export interface IProductParams {
+  category: string | null;
+  searchItem?: string | null;
 }
