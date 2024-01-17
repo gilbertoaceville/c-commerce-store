@@ -10,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 function calculateTotalPrice(products: CartEntity[]) {
   const totalPrice = products?.reduce((acc, curr) => {
-    const totalAmount = Number(curr.quantity ?? 0) * curr.price;
+    const totalAmount = Number(curr.quantity ?? 0) * Number(curr.price);
     return acc + totalAmount;
   }, 0);
 

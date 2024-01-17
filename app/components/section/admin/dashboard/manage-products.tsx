@@ -14,10 +14,10 @@ import { AttributesEntity, ProductsEntity } from "@/base/types/product";
 import { formatPrice } from "@/base/utils/functions/formatPrice";
 import Subject from "@/components/element/subject/subject";
 
-import Cta from "../components/cta";
-import { ManageProductsProps } from "../types";
-import { getColumns } from "../helper/getColumns";
-import locale from "../locale/en.json";
+import Cta from "./components/cta";
+import { ManageProductsProps } from "./types";
+import { getProductColumns } from "./helper/getColumns";
+import locale from "./locale/en.json";
 
 function ManageProductsSection({ products }: ManageProductsProps) {
   const router = useRouter();
@@ -91,7 +91,7 @@ function ManageProductsSection({ products }: ManageProductsProps) {
     }
   }
 
-  const columns = getColumns({
+  const columns = getProductColumns({
     field: "action",
     headerName: "Event",
     width: 150,
@@ -123,7 +123,7 @@ function ManageProductsSection({ products }: ManageProductsProps) {
   return (
     <div className="max-w-[1150px] mx-auto text-xl">
       <div className="mb-6 mt-8">
-        <Subject title={locale.title} center />
+        <Subject title={locale.manageProductTitle} center />
       </div>
       <div style={{ height: 550, width: "100%" }}>
         <DataGrid
