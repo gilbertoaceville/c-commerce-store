@@ -1,0 +1,13 @@
+{
+  "orderDetailTitle": "Order Details",
+  "orderId": "Order ID",
+  "totalAmount": "Total Amount",
+  "paymentStatus": "Payment Status",
+  "deliveryStatus": "Delivery Status",
+  "date": "Date",
+  "productOrdered": "Products Ordered",
+  "product": "Product",
+  "price": "Price",
+  "qty": "Qty",
+  "total": "Total"
+}

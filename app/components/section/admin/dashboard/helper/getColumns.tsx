@@ -1,13 +1,9 @@
-import {
-  MdAccessTimeFilled,
-  MdClose,
-  MdDeliveryDining,
-  MdDone,
-} from "react-icons/md";
+import { MdClose, MdDone } from "react-icons/md";
 import { GridColDef } from "@mui/x-data-grid";
 
 import ContentStatus from "../components/content-status";
 import locale from "../locale/en.json";
+import { getDeliveryStatus, getPaymentStatus } from "./getStatus";
 
 export function getProductColumns(cellProps: GridColDef): GridColDef[] {
   return [
@@ -71,21 +67,8 @@ export function getOrderColumns(cellProps: GridColDef): GridColDef[] {
       headerName: "Payment Status",
       width: 120,
       renderCell: (params) => {
-        const deliveryStatus =
-          params.row?.paymentStatus === locale.pending ? (
-            <ContentStatus
-              text={locale.pending}
-              className="bg-slate-500"
-              icon={MdAccessTimeFilled}
-            />
-          ) : params.row?.paymentStatus === locale.completed ? (
-            <ContentStatus
-              text={locale.completed}
-              className="bg-green-500 text-green-200"
-              icon={MdDone}
-            />
-          ) : null;
-        return <div className="">{deliveryStatus}</div>;
+        const paymentStatus = getPaymentStatus(params.row?.paymentStatus);
+        return <div className="">{paymentStatus}</div>;
       },
     },
     {
@@ -93,26 +76,7 @@ export function getOrderColumns(cellProps: GridColDef): GridColDef[] {
       headerName: "Delivery Status",
       width: 120,
       renderCell: (params) => {
-        const deliveryStatus =
-          params.row?.deliveryStatus === locale.pending ? (
-            <ContentStatus
-              text={locale.pending}
-              className="bg-slate-500"
-              icon={MdAccessTimeFilled}
-            />
-          ) : params.row?.deliveryStatus === locale.dispatched ? (
-            <ContentStatus
-              text={locale.dispatched}
-              className="bg-indigo-500 text-indigo-200"
-              icon={MdDeliveryDining}
-            />
-          ) : params.row?.deliveryStatus === locale.delivered ? (
-            <ContentStatus
-              text={locale.delivered}
-              className="bg-green-500 text-green-200"
-              icon={MdDone}
-            />
-          ) : null;
+        const deliveryStatus = getDeliveryStatus(params.row?.deliveryStatus);
         return <div>{deliveryStatus}</div>;
       },
     },

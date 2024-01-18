@@ -20,6 +20,7 @@ import moment from "moment";
 function ManageOrdersSection({ orders }: ManageOrdersProps) {
   const router = useRouter();
 
+  // consider useMemo
   let rows: any[] = [];
 
   if (orders) {
@@ -45,7 +46,7 @@ function ManageOrdersSection({ orders }: ManageOrdersProps) {
     try {
       const response = await axios.put("/api/order", {
         id,
-        deliveryStatus: "dispatched",
+        deliveryStatus: locale.dispatched,
       });
 
       if (response.status >= 200 && response.status < 300) {
@@ -68,7 +69,7 @@ function ManageOrdersSection({ orders }: ManageOrdersProps) {
     try {
       const response = await axios.put("/api/order", {
         id,
-        deliveryStatus: "delivered",
+        deliveryStatus: locale.delivered,
       });
 
       if (response.status >= 200 && response.status < 300) {
@@ -81,6 +82,7 @@ function ManageOrdersSection({ orders }: ManageOrdersProps) {
     }
   }
 
+  // use useMemo()
   const columns = getOrderColumns({
     field: "action",
     headerName: "Event",

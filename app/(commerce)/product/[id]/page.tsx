@@ -1,7 +1,6 @@
 import { IParams } from "@/base/types/params";
 import Container from "@/components/layout/container/container";
 import ProductDetail from "@/components/section/product-detail/product-detail";
-import data from "@/base/lib/products.json";
 import ListRating from "@/components/section/list-rating/list-rating";
 import { ProductsEntity } from "@/base/types/product";
 import { getProducts } from "@/base/actions/getProducts";

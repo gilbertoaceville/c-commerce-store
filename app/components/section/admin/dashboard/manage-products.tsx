@@ -22,6 +22,7 @@ import locale from "./locale/en.json";
 function ManageProductsSection({ products }: ManageProductsProps) {
   const router = useRouter();
 
+  // consider useMemo, also check keys
   let rows: Omit<ProductsEntity, "description">[] = [];
 
   if (products) {
@@ -91,6 +92,7 @@ function ManageProductsSection({ products }: ManageProductsProps) {
     }
   }
 
+  // use useMemo() or keys
   const columns = getProductColumns({
     field: "action",
     headerName: "Event",

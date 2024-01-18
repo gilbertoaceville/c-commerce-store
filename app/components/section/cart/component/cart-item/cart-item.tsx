@@ -11,7 +11,7 @@ import { useCartContext } from "@/providers/cart";
 export default function CartItem({ item }: { item: CartEntity }) {
   const { removeProductFromCart, increaseQtyInCart, decreaseQtyInCart } =
     useCartContext();
-  const total = formatPrice(item.price * Number(item.quantity));
+  const total = formatPrice(Number(item.price) * Number(item.quantity));
   return (
     <div className="grid grid-cols-5 text-xs md:text-sm gap-4 border-t-[1.5px] border-slate-800 py-4 items-center">
       <div className="flex col-span-2 justify-self-start gap-2 md:gap-4">
