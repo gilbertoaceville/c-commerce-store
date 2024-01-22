@@ -7,7 +7,7 @@ import Container from "@/components/layout/container/container";
 import CartCount from "@/components/element/cart-count/cart-count";
 
 import Menu from "./component/menu";
-import { IUser } from "@/base/types/user";
+import HeaderCategories from "./component/categories/categories";
 
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
@@ -32,6 +32,7 @@ export default async function Header() {
           </div>
         </Container>
       </div>
+      <HeaderCategories />
     </div>
   );
 }
