@@ -1,8 +1,10 @@
 import { redirect, useRouter } from "next/navigation";
-import ProtectedWrapper from "./protected-wrapper";
-import { IWithProtector } from "./types";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+
+import NotFoundData from "@/components/element/not-found/not-found";
+
+import { IWithProtector } from "./types";
 
 export default function withProtector<T extends IWithProtector>(
   Component: React.ComponentType<T>
@@ -16,7 +18,7 @@ export default function withProtector<T extends IWithProtector>(
     }, [props.currentUser]);
 
     if (!props.currentUser || props.currentUser.role !== "ADMIN") {
-      return <ProtectedWrapper title={props.title || ""} />;
+      return <NotFoundData title={props.title || ""} />;
     }
 
     return <Component {...props} />;

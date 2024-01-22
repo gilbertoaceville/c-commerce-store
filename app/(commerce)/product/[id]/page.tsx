@@ -1,16 +1,10 @@
-import { IParams } from "@/base/types/params";
 import Container from "@/components/layout/container/container";
 import ProductDetail from "@/components/section/product-detail/product-detail";
 import ListRating from "@/components/section/list-rating/list-rating";
-import { ProductsEntity } from "@/base/types/product";
-import { getProducts } from "@/base/actions/getProducts";
+import { getProductById } from "@/base/actions/getProductById";
 
-export default async function Product({ params }: IParams) {
-  const products = await getProducts({ category: null });
-
-  const product = products?.find(
-    (item) => item.id === params.id
-  ) as ProductsEntity;
+export default async function Product({ params }: { params: { id: string } }) {
+  const product = await getProductById(params);
 
   if (!product) {
     return (
