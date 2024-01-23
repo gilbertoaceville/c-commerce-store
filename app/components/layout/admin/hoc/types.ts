@@ -1,12 +1,6 @@
 import { CurrentUserProps } from "@/base/types/user";
-import {
-  ManageOrdersProps,
-  ManageProductsProps,
-} from "@/components/section/admin/dashboard/types";
+import { AdminDashboardProps } from "@/components/section/admin/dashboard/types";
 
-export interface IWithProtector
-  extends CurrentUserProps,
-    ManageProductsProps,
-    ManageOrdersProps {
+export interface IWithProtector extends CurrentUserProps, AdminDashboardProps {
   title: string;
 }

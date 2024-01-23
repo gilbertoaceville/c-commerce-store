@@ -129,7 +129,7 @@ export default function CartProvider({
   const { totalPrice, totalQty } = useMemo(() => {
     return cartProducts?.reduce(
       (acc, product) => {
-        const subtotal = product.price * (product.quantity ?? 0);
+        const subtotal = Number(product.price) * (product.quantity ?? 0);
 
         acc.totalPrice += subtotal;
         acc.totalQty += product.quantity ?? 0;

@@ -1,4 +1,4 @@
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
@@ -15,7 +15,7 @@ export default function withProtector<T extends IWithProtector>(
         toast.error(props.title || "", { id: "admin-id" });
         redirect("/");
       }
-    }, [props.currentUser]);
+    }, [props.currentUser, props.title]);
 
     if (!props.currentUser || props.currentUser.role !== "ADMIN") {
       return <NotFoundData title={props.title || ""} />;

@@ -27,7 +27,7 @@ export async function POST(req: Request) {
   const body = await req.json();
   const { products, payment_intent_id } = body;
 
-  const totalPrice =  Math.round(calculateTotalPrice(products) *100); //multiple by a 100 since stripe takes payments in cents
+  const totalPrice =  Math.round(calculateTotalPrice(products) * 100); //multiple by a 100 since stripe takes payments in cents
 
   // order data to be saved in mongodb
   const orderData = {
@@ -97,4 +97,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ paymentIntent });
   }
+
+  // a default error response is returned if none of the conditions are met
+  return NextResponse.error();
 }

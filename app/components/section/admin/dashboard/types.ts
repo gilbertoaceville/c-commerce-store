@@ -1,5 +1,5 @@
 import { ProductsEntity } from "@/base/types/product";
-import { Order, User } from "@prisma/client";
+import { Order, User, Product } from "@prisma/client";
 import { IconType } from "react-icons";
 
 export interface ManageProductsProps {
@@ -26,3 +26,26 @@ export interface CtaProps {
   disabled?: boolean;
   title?: string;
 }
+
+export interface SummaryProps extends ManageOrdersProps, ManageProductsProps {
+  users?: User[];
+}
+
+export type SummaryDataType = {
+  [key: string]: {
+    label: string;
+    digit: number;
+  };
+};
+
+export interface BarChartProps {
+  data?: BarType[];
+}
+
+export type BarType = {
+  day: string;
+  date: string;
+  amount: number;
+};
+
+export interface AdminDashboardProps extends SummaryProps, BarChartProps {}
