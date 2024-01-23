@@ -2,7 +2,7 @@
   "manageProductTitle": "Manage Products",
   "manageOrderTitle": "Manage Orders",
   "pending": "pending",
-  "completed": "completed",
+  "complete": "complete",
   "dispatched": "dispatched",
   "delivered": "delivered",
   "inStock": "In Stock",

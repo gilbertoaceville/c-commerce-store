@@ -15,10 +15,10 @@ export function getPaymentStatus(status: string, className?: string) {
         />
       );
     }
-    case locale.completed: {
+    case locale.complete: {
       return (
         <ContentStatus
-          text={locale.completed}
+          text={locale.complete}
           className="bg-green-500 text-green-200"
           icon={MdDone}
         />

@@ -8,6 +8,7 @@ import CartCount from "@/components/element/cart-count/cart-count";
 
 import Menu from "./component/menu";
 import HeaderCategories from "./component/categories/categories";
+import SearchBar from "./component/search-bar";
 
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
@@ -24,10 +25,12 @@ export default async function Header() {
             >
               Bluecube_
             </Link>
-            <div className="hidden md:block">Search</div>
+            <div className="hidden md:block">
+              <SearchBar />
+            </div>
             <div className="flex items-center gap-8 md:gap-12">
               <CartCount />
-              <Menu currentUser={user}/>
+              <Menu currentUser={user} />
             </div>
           </div>
         </Container>

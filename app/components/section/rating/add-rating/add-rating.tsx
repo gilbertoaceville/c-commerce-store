@@ -19,8 +19,6 @@ export default function AddRating({ product, currentUser }: AddRatingProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log({ currentUser });
-
   const {
     register,
     handleSubmit,
@@ -46,22 +44,22 @@ export default function AddRating({ product, currentUser }: AddRatingProps) {
   async function onSubmit(data: FieldValues) {
     setIsLoading(true);
     if (data.rating === 0) {
-        setIsLoading(false);
-        return toast.error(locale.noRatingError)
-    };
+      setIsLoading(false);
+      return toast.error(locale.noRatingError);
+    }
 
     try {
       const response = await axios.post("/api/rating", {
         ...data,
         userId: currentUser?.id,
-        productId: product.id,
+        product,
       });
       if (response.status >= 200 && response.status < 300) {
         toast.success(locale.ratingCreatedText, { id: "rate-product" });
         router.refresh();
         reset();
       } else {
-        console.log(response);
+        console.log({ response });
       }
     } catch (error) {
       console.error(locale.ratingCreatedError, error);

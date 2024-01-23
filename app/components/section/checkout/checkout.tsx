@@ -88,7 +88,7 @@ export default function CheckoutSection() {
           <div className="text-center text-green-500">
             {locale.paymentSuccess}
           </div>
-          <Link href="/order" className="block max-w-[220px] w-full">
+          <Link href="/orders" className="block max-w-[220px] w-full">
             <Button label={locale.viewOrders} />
           </Link>
         </div>

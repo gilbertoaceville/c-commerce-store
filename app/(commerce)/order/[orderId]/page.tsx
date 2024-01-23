@@ -1,6 +1,6 @@
 import { IParams } from "@/base/types/params";
 import Container from "@/components/layout/container/container";
-import OrderDetail from "@/components/section/admin/order-details/order-details";
+import OrderDetail from "@/components/section/order-details/order-details";
 import { getOrderById } from "@/base/actions/getOrderById";
 
 export default async function Order({
