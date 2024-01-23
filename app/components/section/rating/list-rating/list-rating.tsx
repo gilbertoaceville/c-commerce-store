@@ -7,6 +7,7 @@ import { Rating } from "@mui/material";
 import Avatar from "@/components/element/avatar/avatar";
 
 export default function ListRating({ product }: ListRatingProps) {
+  if (!product.reviews || product.reviews.length === 0) return null;
   return (
     <div>
       <Subject title={locale.title} />

@@ -9,6 +9,7 @@ export default function Input({
   disabled,
   type = "text",
   register,
+  className,
   ...rest
 }: InputProps) {
   const isTextArea = type === "textarea";
@@ -29,6 +30,7 @@ export default function Input({
         {...register(id, { required })}
         placeholder=""
         className={clsx(
+          className,
           "peer w-full p-4 pt-6 resize-none outline-none bg-secondary text-primary text-sm font-light border-2 rounded-md transition disabled:cursor-not-allowed disabled:opacity-70",
           errors?.[id]
             ? "border-rose-500 focus:border-rose-500"

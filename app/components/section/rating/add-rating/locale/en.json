@@ -1,0 +1,8 @@
+{
+  "ratingTitle": "Rate this product",
+  "addRating": "Add Rating",
+  "loading": "Loading...",
+  "noRatingError": "Rating is not selected",
+  "ratingCreatedText": "Rating is created",
+  "ratingCreatedError": "Error submitting rating"
+}

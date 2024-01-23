@@ -99,7 +99,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       <div className="flex flex-col gap-1 text-sm text-foreground">
         <h2 className="text-3xl font-medium text-primary">{product.name}</h2>
         <div className="flex items-center gap-2 my-4 separator">
-          <Rating value={productRating} readOnly />
+          <Rating value={productRating} readOnly className="rating" />
           <div>
             {reviewLength} review{reviewTextEnd}
           </div>

@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   const { comment, rating, product, userId } = await req.json();
 
   // users can only post a review/rating if orders are delivered
-  // find the particular product that is to be reviewed and checked order status
+  // find the particular product that is to be reviewed and check order status
   const isOrderDelivered = user.orders.some(
     (order) =>
       order.products.find((prod) => prod.id === product.id) &&
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     (review: Review) => review.userId === user.id
   );
 
-  if (isReviewed && !isOrderDelivered) {
+  if (isReviewed || !isOrderDelivered) {
     return NextResponse.json(
       {
         message: "You can only review a product once",
@@ -38,4 +38,15 @@ export async function POST(req: Request) {
       { status: 403 }
     );
   }
+
+  const review = await prisma.review.create({
+    data: {
+      comment,
+      rating,
+      userId,
+      productId: product.id,
+    },
+  });
+
+  return NextResponse.json(review);
 }

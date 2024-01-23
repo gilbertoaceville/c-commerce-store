@@ -38,6 +38,14 @@
 }
 
 @layer components {
+  .rating {
+    @apply w-fit;
+  }
+
+  .rating svg {
+    @apply stroke-slate-500;
+  }
+
   .stock[data-in-stock="false"] {
     @apply text-red-500;
   }

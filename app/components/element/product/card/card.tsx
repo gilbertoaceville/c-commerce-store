@@ -27,7 +27,7 @@ export default function ProductCard({ data }: ProductCardProps) {
         </div>
         <div className="mt-4">{productName}</div>
         <div>
-          <Rating value={productRating} readOnly />
+          <Rating value={productRating} readOnly className="rating" />
         </div>
         <div>
           {reviewLength} review{reviewTextEnd}

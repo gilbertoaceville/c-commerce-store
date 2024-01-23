@@ -7,6 +7,6 @@ export interface IUser
   updatedAt?: string;
 }
 
-export interface CurrentUserProps {
-  currentUser: IUser | null;
+export interface CurrentUserProps<T = any> {
+  currentUser: (IUser & T) | null;
 }
