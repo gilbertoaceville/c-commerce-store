@@ -15,6 +15,7 @@ const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 export default async function Header() {
   const user = await getUser();
   return (
+
     <div className="sticky top-0 w-full z-10 bg-tertiary shadow-sm">
       <div className="py-4 border-b-[1px] border-secondary">
         <Container>
@@ -35,7 +36,6 @@ export default async function Header() {
           </div>
         </Container>
       </div>
-      <HeaderCategories />
     </div>
   );
 }
