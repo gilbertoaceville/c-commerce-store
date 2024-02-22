@@ -128,19 +128,25 @@ To run this project, you will need to add the following environment variables to
 DATABASE_URL= Your mongoDB URL
 
 NEXTAUTH_SECRET= Custom auth secret
+
 NEXTAUTH_URL= Base URL for localhost => http://localhost:3000
 
 GOOGLE_CLIENT_ID= Google console id
+
 GOOGLE_CLIENT_SECRET= Google console secret
 
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY= Stripe publishable key
+
 STRIPE_SECRET_KEY=
+
 STRIPE_WEBHOOK_SECRET= Stripe Webhook secret for automatic order update
 
 NEXT_PUBLIC_SITE= Base URL for localhost => http://localhost:3000
 
-FIREBASE_API_KEY=
+FIREBASE_API_KEY= firebase api key from firebase dashboard
+
 FIREBASE_MESSAGE_SENDER_ID=
+
 FIREBASE_APP_ID=
 
 ### Installation
